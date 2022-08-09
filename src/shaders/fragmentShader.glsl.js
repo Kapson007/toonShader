@@ -1,18 +1,17 @@
 const fragmentShader = `
-  varying vec3 lightdir;
-  varying vec3 eyenorm;
-  
+varying vec3 lightdir;
+varying vec3 eyenorm;
+
  void main() {
-    //vec3 lightdir = vec3 (1,1,2);
-    float ndotl = dot(normalize (eyenorm), normalize (lightdir));
-    if (ndotl > 0.8) {
-    ndotl = 1.0;
-    } else if (ndotl > 0.6) {
-    ndotl = 0.6;
+    float nn = dot (normalize(lightdir), normalize(eyenorm));
+  if (nn > 0.8) {
+       nn= 1.0;
+    } else if (nn > 0.6) {
+       nn = 0.6;
     } else {
-    ndotl = 0.2;
+       nn = 0.2;
     }
-    gl_FragColor = vec4 (ndotl, ndotl, ndotl, 1.0);
+    gl_FragColor = vec4 (nn,nn,nn, 1.0);
  }
 `;
 

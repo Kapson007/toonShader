@@ -15,16 +15,24 @@ const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
 
 // Objects
-const geometry = new THREE.BoxGeometry(1, 1, 1);
+const geometry = new THREE.SphereGeometry(0.5, 32, 16);
 
 // Materials
 const customShaderMaterial = new THREE.ShaderMaterial({
   vertexShader: vShader,
   fragmentShader: fShader,
+  uniforms: {
+    lightpos: {
+      type: "v3",
+      value: new THREE.Vector3(0, 30, 20),
+    },
+  },
 });
 
-const material = new THREE.MeshBasicMaterial();
-material.color = new THREE.Color(0x00aaee);
+const material = new THREE.MeshStandardMaterial({
+  color: 0xffaa00,
+  roughness: 0.4,
+});
 
 // Mesh
 const sphere = new THREE.Mesh(geometry, customShaderMaterial);
@@ -32,12 +40,21 @@ scene.add(sphere);
 
 // Lights
 
-const pointLight = new THREE.PointLight(0xffffff, 0.1);
-// pointLight.position.x = 2;
-// pointLight.position.y = 3;
-// pointLight.position.z = 4;
-pointLight.position.set(1, -10, 20);
+const pointLight = new THREE.PointLight(0xff00ff, 1);
+const pointLight2 = new THREE.PointLight(0x00ffff, 0.2);
+pointLight.position.set(1, 1, 1);
+pointLight2.position.set(1, 2, 20);
 scene.add(pointLight);
+scene.add(pointLight2);
+
+gui.add(pointLight.position, "y").min(-3).max(3).step(0.01);
+gui.add(pointLight.position, "x").min(-3).max(3).step(0.01);
+gui.add(pointLight.position, "z").min(-3).max(3).step(0.01);
+gui.add(pointLight, "intensity").min(0).max(3).step(0.01);
+
+let ambientLight = new THREE.AmbientLight(0x111111);
+ambientLight.position.set(1, 1, 10);
+scene.add(ambientLight);
 
 /**
  * Sizes
@@ -66,14 +83,13 @@ window.addEventListener("resize", () => {
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(
-  75,
+  45,
   sizes.width / sizes.height,
   0.1,
-  100
+  10000
 );
-camera.position.x = 0;
-camera.position.y = 0;
 camera.position.z = 2;
+camera.lookAt(new THREE.Vector3(0, 0, 0));
 scene.add(camera);
 
 // Controls
@@ -86,6 +102,7 @@ controls.enableZoom = false;
  */
 const renderer = new THREE.WebGLRenderer({
   canvas: canvas,
+  antialias: true,
 });
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -95,10 +112,11 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  */
 
 const clock = new THREE.Clock();
-
+let angle = 0;
 const tick = () => {
   const elapsedTime = clock.getElapsedTime();
-
+  angle += 0.01;
+  // pointLight.position.set(50 * Math.cos(angle), 75, 50 * Math.sin(angle));
   // Update objects
   sphere.rotation.y = 0.5 * elapsedTime;
 
