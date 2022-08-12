@@ -1,8 +1,12 @@
 const fragmentShader = `
+  #version 330 core
+  in vec4 location;
+  in vec4 normal;
+  in vec4 color;
 
-   unform bool CelShading = true;
+  unform bool CelShading = true;
 
-   float discreteValue(float value)
+  float discreteValue(float value)
 {
   if(value < 0) return 0;
   if(value < 0.25) return 0.1;
@@ -20,7 +24,7 @@ vec4 dicreteColor(vec4 color){
 out vec4 resultColor;
 
     void main(void) {
-      gl_FragColor = vec4(0.0, 1.0, 1.0, 1.0);
+      gl_FragColor = vec4(0.0, 1.0, 1.0, 1.0)
       if(CelShading) resultColor = discreteColor(gl_FragColor);
     }
 `;
