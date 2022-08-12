@@ -35,8 +35,10 @@ const material = new THREE.MeshStandardMaterial({
 });
 
 // Mesh
-const sphere = new THREE.Mesh(geometry, customShaderMaterial);
+const sphere = new THREE.Mesh(geometry, material);
+const sphere2 = new THREE.Mesh(geometry, customShaderMaterial);
 scene.add(sphere);
+//scene.add(sphere2);
 
 // Lights
 
