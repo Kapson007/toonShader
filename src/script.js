@@ -31,12 +31,13 @@ const customShaderMaterial = new THREE.ShaderMaterial({
 
 const material = new THREE.MeshStandardMaterial({
   color: 0xffaa00,
-  roughness: 0.4,
+  roughness: 0.39,
+  vertexShader: vShader,
+  fragmentShader: fShader,
 });
 
 // Mesh
 const sphere = new THREE.Mesh(geometry, material);
-const sphere2 = new THREE.Mesh(geometry, customShaderMaterial);
 scene.add(sphere);
 //scene.add(sphere2);
 

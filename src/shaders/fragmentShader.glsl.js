@@ -8,16 +8,16 @@ varying vec3 eyenorm;
     vec3 n = normalize(eyenorm);
     intensity = dot (vec3(gl_LightSource[0].position), n);
   if (intensity > 0.95) {
-       color= 1.0;
+       color= vec4(1.0, 0.5, 0.5, 1.0);
     } else if (intensity > 0.5) {
-       color = 0.6;
+       color = vec4(0.6, 0.3, 0.3, 1.0);
     } else if (intensity > 0.25) {
-       color = 0.4;
+       color = vec4(0.4, 0.2, 0.2, 1.0);
     }
     else {
-      color = 0.2;
+      color = vec4(0.2, 0.1, 0.1, 1.0);
     }
-    gl_FragColor = vec4 (color,(color/2),(color/2), 1.0);
+    gl_FragColor = color;
  }
 `;
 
