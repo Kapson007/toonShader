@@ -27,9 +27,16 @@ groundMesh.position.y = -2;
 scene.add(groundMesh);
 
 // Materials
+// TODO: add params to customShaderMaterial
 const customShaderMaterial = new THREE.ShaderMaterial({
   vertexShader: vShader,
   fragmentShader: fShader,
+  uniforms: {
+    color: {
+      type: "v4",
+      value: new THREE.Vector4(1.0, 0.0, 1.0, 1.0),
+    },
+  },
 });
 
 const material = new THREE.MeshToonMaterial({
@@ -37,7 +44,7 @@ const material = new THREE.MeshToonMaterial({
 });
 
 // Mesh
-const sphere = new THREE.Mesh(geometry, material);
+const sphere = new THREE.Mesh(geometry, customShaderMaterial);
 
 sphere.castShadow = true; //default is false
 sphere.receiveShadow = false; //default
