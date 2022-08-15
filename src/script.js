@@ -15,10 +15,15 @@ const canvas = document.querySelector("canvas.webgl");
 const scene = new THREE.Scene();
 
 // Objects
-const geometry = new THREE.BoxGeometry(1, 1, 1);
+const geometry = new THREE.SphereGeometry(0.5, 64, 64);
 
 // Materials
 const customShaderMaterial = new THREE.ShaderMaterial({
+  uniforms: {
+    sphereColour:{
+      value: new THREE.Vector3(0,0,1),
+    }
+  },
   vertexShader: vShader,
   fragmentShader: fShader,
 });
