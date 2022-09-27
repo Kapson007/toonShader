@@ -1,4 +1,4 @@
-# Webpack THREE.js Template
+# Toon Shader Project - Compter Graphic ICT semester 6 Poznan University of Techhnology
 
 ## Setup
 
@@ -28,3 +28,7 @@ Effect is shown on te ball that is located above gray platform.There are two typ
 - GLSL,
 - CSS,
 - HTML (with Canvas)
+
+### Authors:
+- Julia Glanc
+- Kacper Nadstoga
