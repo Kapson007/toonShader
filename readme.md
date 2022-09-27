@@ -1,4 +1,4 @@
-# Toon Shader Project - Compter Graphic ICT semester 6 Poznan University of Techhnology
+# Toon Shader Project - Computer Graphic ICT semester 6 PUT
 
 ## Setup
 
